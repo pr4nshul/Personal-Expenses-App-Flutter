@@ -1,3 +1,4 @@
+import './widget/chart.dart';
 import './widget/new_transaction.dart';
 import './widget/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,9 @@ class FirstApp extends StatelessWidget {
     return MaterialApp(
       title: 'Daily expenses',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          accentColor:Colors.amberAccent,
-          fontFamily: 'Grandstander',
+        primarySwatch: Colors.blue,
+        accentColor: Colors.amberAccent,
+        fontFamily: 'Grandstander',
       ),
       home: MyApp(),
     );
@@ -53,11 +54,20 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  List<Transaction> get _recentTransaction {
+    return _userExpenses.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         actions: [
           IconButton(
             icon: Icon(
@@ -70,17 +80,13 @@ class _MyAppState extends State<MyApp> {
         title: Text(
           'Daily expense tracker',
           style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
+              fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Card(
-              child: Text('Chart'),
-            ),
+            Chart(_recentTransaction),
             TransactionList(_userExpenses),
           ],
         ),
