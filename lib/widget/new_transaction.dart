@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTx;
-  final titleHandler = TextEditingController();
-  final amountHandler = TextEditingController();
 
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleHandler = TextEditingController();
+
+  final amountHandler = TextEditingController();
+
+  void submitData(){
+    final enteredText = titleHandler.text;
+    final enteredAmount = double.parse(amountHandler.text);
+    if(enteredAmount<=0 || enteredText.isEmpty){
+      return;
+    }
+    widget.addTx(enteredText, enteredAmount);
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +36,13 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleHandler,
+              onSubmitted: (_) => submitData(),
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountHandler,
               keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
             ),
             RaisedButton(
               color: Colors.black,
@@ -34,9 +53,7 @@ class NewTransaction extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: () {
-                addTx(titleHandler.text, double.parse(amountHandler.text));
-              },
+              onPressed:submitData,
             )
           ],
         ),
