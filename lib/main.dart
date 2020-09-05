@@ -35,10 +35,10 @@ class _MyAppState extends State<MyApp> {
   String title;
   double amount;
 
-  void _addTransaction(String txTitle, double txAmount) {
+  void _addTransaction(String txTitle, double txAmount, DateTime date) {
     var tx = Transaction(
         cost: txAmount,
-        date: DateTime.now(),
+        date: date,
         id: DateTime.now().toString(),
         title: txTitle);
     setState(() {
