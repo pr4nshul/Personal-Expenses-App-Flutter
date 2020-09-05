@@ -8,10 +8,10 @@ A flutter application under development which helps you keep track of your daily
 
 - Currently, it is splitted in 4 Widgets and 1 Module Dart file 
 - **Widgets**
-  - chart.dart
-  - chart_bar.dart
-  - new_transaction.dart
-  - transaction_list.dart
+  - [chart.dart](https://github.com/pr4nshul/Personal-Expenses-App-Flutter/blob/master/lib/widget/chart.dart)
+  - [chart_bar.dart](https://github.com/pr4nshul/Personal-Expenses-App-Flutter/blob/master/lib/widget/Chart_bar.dart)
+  - [new_transaction.dart](https://github.com/pr4nshul/Personal-Expenses-App-Flutter/blob/master/lib/widget/new_transaction.dart)
+  - [transaction_list.dart](https://github.com/pr4nshul/Personal-Expenses-App-Flutter/blob/master/lib/widget/transaction_list.dart)
 
 - **Modules**
   - transactions.dart
