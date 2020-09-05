@@ -12,6 +12,7 @@ A flutter application under development which helps you keep track of your daily
   - chart_bar.dart
   - new_transaction.dart
   - transaction_list.dart
+
 - **Modules**
   - transactions.dart
   
