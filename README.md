@@ -14,7 +14,7 @@ A flutter application under development which helps you keep track of your daily
   - [transaction_list.dart](https://github.com/pr4nshul/Personal-Expenses-App-Flutter/blob/master/lib/widget/transaction_list.dart)
 
 - **Modules**
-  - transactions.dart
+  - [transactions.dart](https://github.com/pr4nshul/Personal-Expenses-App-Flutter/blob/master/lib/modules/transaction.dart)
   
 ### Overview of UI
 - **Screenshots**
