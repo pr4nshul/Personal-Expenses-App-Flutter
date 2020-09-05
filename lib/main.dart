@@ -29,8 +29,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final List<Transaction> _userExpenses = [
-    Transaction(cost: 44.99, title: 'Watch', date: DateTime.now(), id: 't1'),
-    Transaction(cost: 39.99, title: 'shoes', date: DateTime.now(), id: 't2'),
+//    Transaction(cost: 44.99, title: 'Watch', date: DateTime.now(), id: 't1'),
+//    Transaction(cost: 39.99, title: 'shoes', date: DateTime.now(), id: 't2'),
   ];
   String title;
   double amount;
@@ -65,7 +65,11 @@ class _MyAppState extends State<MyApp> {
       );
     }).toList();
   }
-
+  void _delete(String id){
+    setState(() {
+      _userExpenses.removeWhere((tx) => id==tx.id);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +107,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                 )
-                : TransactionList(_userExpenses),
+                : TransactionList(_userExpenses,_delete),
           ],
         ),
       ),
