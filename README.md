@@ -19,19 +19,19 @@ A flutter application under development which helps you keep track of your daily
 ### Overview of UI
 - **Screenshots**
 
-  ![No](/Screenshots/NoTransaction.png)
+  ![No](/Screenshots/NoTransaction.png){:height="50%" width="50%"}
   
   - *When no transactions are there*
   
-  ![1](/Screenshots/One.png)
+  ![1](/Screenshots/One.png){:height="50%" width="50%"}
   
   - *After first transaction the Bar on that particular day fills up*
   
-  ![2](/Screenshots/Two.png)
+  ![2](/Screenshots/Two.png){:height="50%" width="50%"}
   
   - *After two transactions it splits up according to the amounts*
   
-  ![3](/Screenshots/Three.png)
+  ![3](/Screenshots/Three.png){:height="50%" width="50%"}
   
   - *The same pattern continues but is only valid for previous 7 days*
 
