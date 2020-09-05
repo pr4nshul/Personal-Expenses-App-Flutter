@@ -29,16 +29,19 @@ class _NewTransactionState extends State<NewTransaction> {
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Card(
+        color: Theme.of(context).primaryColor,
         elevation: 5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
+              cursorColor: Colors.black,
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleHandler,
               onSubmitted: (_) => submitData(),
             ),
             TextField(
+              cursorColor: Colors.black,
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountHandler,
               keyboardType: TextInputType.number,

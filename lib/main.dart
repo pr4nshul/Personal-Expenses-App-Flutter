@@ -11,6 +11,7 @@ class FirstApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Daily expenses',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         accentColor: Colors.amberAccent,
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
 
   void _startAddNew(BuildContext ctx) {
     showModalBottomSheet(
+      backgroundColor: Colors.black,
       context: ctx,
       builder: (_) {
         return NewTransaction(_addTransaction);
@@ -67,6 +69,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         actions: [
           IconButton(
@@ -87,7 +90,20 @@ class _MyAppState extends State<MyApp> {
         child: Column(
           children: [
             Chart(_recentTransaction),
-            TransactionList(_userExpenses),
+            SizedBox(height: 10.0,),
+            _userExpenses.length == 0
+                ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      "Add new Transactions by clicking on + button on top right or bottom",
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                )
+                : TransactionList(_userExpenses),
           ],
         ),
       ),

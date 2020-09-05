@@ -14,29 +14,35 @@ class TransactionList extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (ctx, index) {
           return Card(
+            color: Colors.white,
             child: Container(
               child: Row(
                 children: [
                   Container(
+                    height: 90,
+                    width: 90,
                     margin: EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 15,
                     ),
                     decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
+                      shape: BoxShape.circle,
                       color: Colors.black,
                       border: Border.all(
-                        width: 2,
+                        width: 4,
                         color: Theme.of(context).primaryColorDark,
                       ),
                     ),
                     padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      '\$ ${transactions[index].cost.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColorDark,
-                        fontSize: 20.0,
+                    child: FittedBox(
+                      child: Text(
+                        '\$ ${transactions[index].cost.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 30.0,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
