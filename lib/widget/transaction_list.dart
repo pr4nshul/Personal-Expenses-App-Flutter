@@ -9,9 +9,7 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 350,
-      child: ListView.builder(
+    return ListView.builder(
         itemBuilder: (ctx, index) {
           return Card(
             color: Colors.white,
@@ -82,7 +80,6 @@ class TransactionList extends StatelessWidget {
           );
         },
         itemCount: transactions.length,
-      ),
-    );
+      );
   }
 }

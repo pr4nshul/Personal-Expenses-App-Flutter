@@ -16,7 +16,7 @@ class _NewTransactionState extends State<NewTransaction> {
   final amountHandler = TextEditingController();
 
   void submitData() {
-    if(titleHandler.text.isEmpty){
+    if (titleHandler.text.isEmpty) {
       return;
     }
     final enteredText = titleHandler.text;
@@ -24,7 +24,7 @@ class _NewTransactionState extends State<NewTransaction> {
     if (enteredAmount <= 0 || enteredText.isEmpty || _selectedDate == null) {
       return;
     }
-    widget.addTx(enteredText, enteredAmount,_selectedDate);
+    widget.addTx(enteredText, enteredAmount, _selectedDate);
     Navigator.of(context).pop();
   }
 
@@ -46,73 +46,84 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10.0),
+    return SingleChildScrollView(
       child: Card(
-        color: Theme.of(context).primaryColor,
-        elevation: 5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              cursorColor: Colors.black,
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: titleHandler,
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              cursorColor: Colors.black,
-              decoration: InputDecoration(labelText: 'Amount'),
-              controller: amountHandler,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
+        color: Colors.black,
+        elevation: 5.0,
+        child: Container(
+          padding: EdgeInsets.only(
+              top: 10.0,
+              left: 10.0,
+              right: 10.0,
+              bottom: 10 + MediaQuery.of(context).viewInsets.bottom
+          ),
+          child: Card(
+            color: Theme.of(context).primaryColor,
+            elevation: 5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      _selectedDate == null
-                          ? 'No date chosen'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                TextField(
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(labelText: 'Title'),
+                  controller: titleHandler,
+                  onSubmitted: (_) => submitData(),
+                ),
+                TextField(
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(labelText: 'Amount'),
+                  controller: amountHandler,
+                  keyboardType: TextInputType.number,
+                  onSubmitted: (_) => submitData(),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          _selectedDate == null
+                              ? 'No date chosen'
+                              : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    FlatButton(
+                      highlightColor: Colors.white,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      onPressed: _datePicker,
+                    )
+                  ],
                 ),
-                FlatButton(
-                  highlightColor: Colors.white,
+                RaisedButton(
+                  color: Colors.black,
                   child: Text(
-                    'Choose Date',
+                    'Add Transaction',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.blue,
                       fontWeight: FontWeight.bold,
-                      fontSize: 17,
                     ),
                   ),
-                  onPressed: _datePicker,
+                  onPressed: submitData,
                 )
               ],
             ),
-            RaisedButton(
-              color: Colors.black,
-              child: Text(
-                'Add Transaction',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              onPressed: submitData,
-            )
-          ],
+          ),
         ),
       ),
     );

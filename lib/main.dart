@@ -3,8 +3,15 @@ import './widget/new_transaction.dart';
 import './widget/transaction_list.dart';
 import 'package:flutter/material.dart';
 import './modules/transaction.dart';
-
-void main() => runApp(FirstApp());
+import 'package:flutter/services.dart';
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(FirstApp());
+}
 
 class FirstApp extends StatelessWidget {
   @override
@@ -65,40 +72,47 @@ class _MyAppState extends State<MyApp> {
       );
     }).toList();
   }
-  void _delete(String id){
+
+  void _delete(String id) {
     setState(() {
-      _userExpenses.removeWhere((tx) => id==tx.id);
+      _userExpenses.removeWhere((tx) => id == tx.id);
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    final appbar = AppBar(
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.add,
+          ),
+          color: Colors.black,
+          onPressed: () => _startAddNew(context),
+        )
+      ],
+      title: Text(
+        'Daily expense tracker',
+        style: TextStyle(
+            fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add,
-            ),
-            color: Colors.black,
-            onPressed: () => _startAddNew(context),
-          )
-        ],
-        title: Text(
-          'Daily expense tracker',
-          style: TextStyle(
-              fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-      ),
+      appBar: appbar,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Chart(_recentTransaction),
-            SizedBox(height: 10.0,),
+            Container(
+                height: (MediaQuery.of(context).size.height-appbar.preferredSize.height -MediaQuery.of(context).padding.top) * 0.28,
+                child: Chart(_recentTransaction)),
+            SizedBox(
+              height: 10.0,
+            ),
             _userExpenses.length == 0
                 ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
                       "Add new Transactions by clicking on + button on top right or bottom",
                       style: TextStyle(
                         fontSize: 30.0,
@@ -106,8 +120,10 @@ class _MyAppState extends State<MyApp> {
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
-                )
-                : TransactionList(_userExpenses,_delete),
+                  )
+                : Container(
+                    height: (MediaQuery.of(context).size.height-appbar.preferredSize.height-MediaQuery.of(context).padding.top) * 0.7,
+                    child: TransactionList(_userExpenses, _delete)),
           ],
         ),
       ),
